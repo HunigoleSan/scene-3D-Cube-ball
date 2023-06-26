@@ -2,6 +2,7 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    font-family: 'Kablammo', cursive;
 }
 html{
     width: 100%;
@@ -153,7 +154,8 @@ body{
     transform-style: preserve-3d;
     font-size: .5em;
     transition: 1s all;
-    text-decoration: none
+    text-decoration: none;
+    cursor: pointer;
 }
 .codedBy:hover{
     background-image: radial-gradient(rgba(239, 172, 65, 0.467), #0000 100%);
@@ -168,7 +170,7 @@ body{
     text-shadow: 10px 10px 1rem #333;
     transform-style: preserve-3d;
     font-size: .5em;
-
+    cursor: pointer;
 }
 .amongUs:hover{
     background-image: radial-gradient(rgba(239, 172, 65, 0.467), #0000 100%);
