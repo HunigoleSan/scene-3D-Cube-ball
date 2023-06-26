@@ -1,0 +1,168 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+html{
+    width: 100%;
+    height: auto;
+}
+body{
+    background: #000;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 75px;
+    /* generamos una perspectiva para que
+    todos los elementos hijos puedan tener la
+    misma perspecta, sin embargo, cada elmento,
+    debe tener presever-3d para que cumpla ello*/
+    perspective: 10em;
+    perspective-origin: 50% calc(50% - 2em);
+}
+
+.scene{
+    position: relative;
+    transform-style: preserve-3d;
+    animation: sceneRotate 30s infinite linear ;
+}
+@keyframes sceneRotate {
+    to{
+        transform: rotateY(360deg);
+    }
+}
+.ball{
+    width: 1em;
+    height: 1em;
+    border-radius: 50%;
+    background: lightblue;
+    position: absolute;
+    left: -.5em;
+    bottom: 2em;
+
+    background-image: radial-gradient(
+        circle at top,
+        lightblue,
+        #000
+    );
+    animation: 
+    ballBounce 2s infinite ease-out,
+    sceneRotate 30s infinite linear reverse;
+}
+@keyframes ballBounce {
+    0%,100%{
+        bottom: .5em;
+        /* opacity: 0; */
+    }
+    50%{
+        /* opacity: 1; */
+        bottom: 3em;
+        animation-timing-function: ease-in;
+    }
+}
+/* se muestra un problema de parpadeo,
+ puede que sea la animación*/
+.cube{
+    width: 2em;
+    height: 2em;
+    position: absolute;
+    bottom: -1em;
+    left: -1em;
+    transform-style: preserve-3d;
+    animation: cubeHeight 2s infinite linear;
+}
+@keyframes cubeHeight {
+    0%,100%{
+        height: 1.5em;
+        transition-timing-function: ease-in;
+    }
+    20%,93.5%{
+        height: 2em;
+        transition-timing-function: ease-out;
+      
+    } 
+}
+.left, .right, .front, .back{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(135, 206, 250, 0.285);
+    box-shadow: 0px 0px 2rem #000 inset;
+    
+}
+.front{
+    transform: translateZ(1em);
+}
+
+.right{
+    transform: rotateY(90deg) translateZ(1em);
+}
+.left{
+    transform: rotateY(-90deg) translateZ(1em);
+}
+.back{
+    transform: rotateY(180deg) translateZ(1em);
+}
+
+.top{
+    position: absolute;
+    width: 2em;
+    height: 2em;
+    background: rgba(135, 206, 250, 0.285);
+    transform: translateY(-50%) rotateX(90deg);
+}
+.ballShadow{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(#0007, #0000 50%);
+    animation: ballShadowAnimated 2s infinite linear;
+
+}
+@keyframes ballShadowAnimated {
+    0%,100%{
+
+        transform: scale(1);
+    }
+    50%{
+        opacity: 0;
+        /* background-image: radial-gradient(#0007, #0000 100%); */
+        transform: scale(2);/* esto puede ser 1 tambien pero + se sale*/
+        transition-timing-function: ease-out;
+        margin-right: 1rem;
+    }
+}
+
+.bottom{
+    position: absolute;
+    width: 2em;
+    height: 2em;
+    background: #0007;
+    bottom: 0;
+    box-shadow: 0 0 1em #000;
+    transform: translateY(50%) rotateX(90deg);
+}
+
+.floor{
+    top: 1em;
+    position: absolute;
+    transform: 
+        translate(-50%, -50%)
+        rotateX(90deg);
+    width: 15em;
+    height: 15em;
+    background-image: 
+        radial-gradient(#0000,#000 70%),
+        repeating-conic-gradient(
+            from 45deg,
+            rgb(68, 67, 67) 0deg 90deg,
+            #232323 90deg 180deg,
+            rgb(68, 67, 67) 180deg 270deg,
+            #232323 270deg 360deg
+            );
+        
+
+    background-size: 100%,1em 1em;
+    }
